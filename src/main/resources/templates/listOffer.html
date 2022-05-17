@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/bulma.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>List Offer - Imaginary Real Estate</title>
+</head>
+<body>
+
+<!--  NAV BAR  -->
+<!-- TODO: change logo -->
+{{> parts/navbar }}
+
+<!--  /NAV BAR  -->
+
+<!--  HELLO BANNER  -->
+<section class="hero is-warning is-medium">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                List your offer now and reach the client faster.
+            </h1>
+            <h2 class="subtitle">
+                Get noticed in the real estate market
+            </h2>
+        </div>
+    </div>
+</section>
+<!--  /HELLO BANNER  -->
+
+
+<!--  CONTENT  -->
+<!--  TODO: Add form validation  -->
+<div class="container">
+    <div class="my-margin">
+        <form action="#" method="post">
+
+            <div class="columns">
+                <div class="column is-half-desktop">
+
+                    <!--    TITLE    -->
+                    <div class="field">
+                        <label class="label">Title</label>
+                        <div class="control">
+                            <input class="input" type="text" name="title" id="title" placeholder="Title">
+                        </div>
+                    </div>
+                    <!--    ADDRESS  -->
+                    <div class="field">
+                        <label class="label">Address</label>
+                        <div class="control">
+                            <input class="input" type="text" name="address" id="address" placeholder="Address">
+                        </div>
+                    </div>
+                    <!--    PRICE    -->
+                    <div class="field">
+                        <label class="label">Price</label>
+                        <div class="control">
+                            <input class="input" type="number" name="price" id="price" placeholder="Price">
+                        </div>
+                    </div>
+                    <!--    AREA Apartment   -->
+                    <div class="field">
+                        <label class="label">Apartment Area</label>
+                        <div class="control">
+                            <input class="input" type="number" name="apartment_area" id="apartment_area"
+                                   placeholder="Apartment Area">
+                        </div>
+                    </div>
+
+                    <!--    BEDROOMS    -->
+                    <div class="field">
+                        <label class="label">Bedrooms</label>
+                        <div class="control has-icons-left">
+                            <div class="select is-fullwidth">
+                                <select name="bedrooms" id="bedrooms">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                            <span class="icon is-small is-left">
+                    <i class="fa-solid fa-bed"></i>
+                </span>
+                        </div>
+                    </div>
+                    <!--    BATHROOMS    -->
+                    <div class="field">
+                        <label class="label">Bathrooms</label>
+                        <div class="control has-icons-left">
+                            <div class="select is-fullwidth">
+                                <select name="bathrooms" id="bathrooms">
+                                    <option value="1" selected>1</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="2">2</option>
+                                    <option value="2.5">2.5</option>
+                                    <option value="3">3</option>
+                                    <option value="3.5">3.5</option>
+                                    <option value="4">4</option>
+                                    <option value="4.5">4.5</option>
+                                    <option value="5">5</option>
+                                    <option value="5.5">5.5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                            <span class="icon is-small is-left">
+                    <i class="fa-solid fa-bath"></i>
+                </span>
+                        </div>
+                    </div>
+                    <!--    Description    -->
+                    <div class="field">
+                        <label class="label">Description</label>
+                        <div class="control">
+                            <textarea class="textarea" name="description" id="description"
+                                      placeholder="Apartment description"></textarea>
+                        </div>
+                    </div>
+
+
+                    <!--  EMAIL  -->
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="email" name="email" id="email" placeholder="Email input">
+                            <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                        </div>
+                        <!--            <p class="help is-danger">This email is invalid</p>-->
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" name="terms" id="terms">
+                                I agree to the <a href="#">terms and conditions</a>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+<!--        IMAGES        -->
+
+                <div class="column">
+                    <div class="field">
+                        <label class="label">Front image</label>
+                        <div class="file has-name is-fullwidth">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="front_photo" id="front_photo">
+                                <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose front image
+                                </span>
+                            </span>
+                                <span class="file-name">
+                                None
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Additional images</label>
+
+                        <div class="my-margin-10-0">
+                            <div class="file has-name is-fullwidth">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="add_photo1" id="add_photo1">
+                                    <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose additional image
+                                </span>
+                                </span>
+                                <span class="file-name">
+                                    None
+                                </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="my-margin-10-0">
+                            <div class="file has-name is-fullwidth">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="add_photo2" id="add_photo2">
+                                    <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose additional image
+                                </span>
+                                </span>
+                                    <span class="file-name">
+                                    None
+                                </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="my-margin-10-0">
+                            <div class="file has-name is-fullwidth">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="add_photo3" id="add_photo3">
+                                    <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose additional image
+                                </span>
+                                </span>
+                                    <span class="file-name">
+                                    None
+                                </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="my-margin-10-0">
+                            <div class="file has-name is-fullwidth">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="add_photo4" id="add_photo4">
+                                    <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose additional image
+                                </span>
+                                </span>
+                                    <span class="file-name">
+                                    None
+                                </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="my-margin-10-0">
+                            <div class="file has-name is-fullwidth">
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="add_photo5" id="add_photo5">
+                                    <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose additional image
+                                </span>
+                                </span>
+                                    <span class="file-name">
+                                    None
+                                </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-grouped is-grouped-right">
+                <div class="control">
+                    <input type="submit" class="button is-success" value="List Offer">
+                </div>
+                <div class="control">
+                    <input type="reset" class="button is-link is-light" value="Cancel">
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <!--  Add offer form  -->
+
+
+</div>
+<!--  / CONTENT  -->
+
+<!--  FOOTER  -->
+{{> parts/footer}}
+<!--  /FOTTER  -->
+
+</body>
+</html>

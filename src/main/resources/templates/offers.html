@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/bulma.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Imaginary Real Estate</title>
+</head>
+<body>
+
+<!--  NAV BAR  -->
+<!-- TODO: change logo -->
+{{> parts/navbar }}
+
+<!--  /NAV BAR  -->
+<!--  HELLO BANNER  -->
+<section class="hero is-warning is-small">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Search place
+            </h1>
+            <form action="/offers" method="get">
+                <div class="field has-addons has-addons-centered">
+                    <div class="control my-halfwidth">
+                        <input class="input " type="text" name="searchPhrase" placeholder="Find by city">
+                    </div>
+                    <div class="control">
+                        <input type="submit" class="button is-success" value="Search">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!--  /HELLO BANNER  -->
+
+
+<!--  CONTENT  -->
+<div class="container">
+
+<!--   Offer banner  -->
+    {{ #offers }}
+    <div class="card my-margin">
+        <a href="/details/{{ id }}" class="has-text-black">
+            <div class="my-card-content">
+                <div class="my-media">
+                    <figure class=" my-400x300">
+                        <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                             alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="my-media-content">
+                    <p class="title is-4">{{ title }}</p>
+                    <p class="subtitle is-6">{{ address }}</p>
+                    <p class="is-4"> Area: <strong>{{ area }}m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-bed"></i> <strong>{{ bedrooms }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-bath"></i> <strong>{{ bathrooms }}</strong></p>
+                    <div class="content">
+                        {{ description }}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {{ /offers }}
+
+<!--  /Offer banner  -->
+
+</div>
+<!--  / CONTENT  -->
+
+<!--  FOOTER  -->
+{{> parts/footer}}
+<!--  /FOTTER  -->
+
+
+</body>
+</html>
