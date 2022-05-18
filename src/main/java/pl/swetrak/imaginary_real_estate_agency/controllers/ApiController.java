@@ -1,13 +1,20 @@
 package pl.swetrak.imaginary_real_estate_agency.controllers;
 
-import jdk.jfr.Description;
+import org.apache.http.entity.ByteArrayEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.swetrak.imaginary_real_estate_agency.models.Offer;
+import pl.swetrak.imaginary_real_estate_agency.services.ImageService;
 import pl.swetrak.imaginary_real_estate_agency.services.OfferService;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -19,10 +26,12 @@ import java.util.UUID;
 public class ApiController {
 
     private final OfferService offerService;
+    private final ImageService imageService;
 
     @Autowired
-    public ApiController(OfferService offerService) {
+    public ApiController(OfferService offerService, ImageService imageService) {
         this.offerService = offerService;
+        this.imageService = imageService;
     }
 
     @PostMapping("/create")
@@ -71,9 +80,27 @@ public class ApiController {
         return new HashMap<String, Object>();
     }
 
-    @GetMapping("/test")
-    String getTest() {
-        return "Kamil Pietrak";
+    @PostMapping("/test")
+    public void getTest(
+            @RequestParam("front_photo") Optional<MultipartFile> frontFile
+    ) {
+        if(frontFile.isPresent()) {
+            try {
+                InputStream inputStream = new BufferedInputStream(frontFile.get().getInputStream());
+                String nazwa = UUID.randomUUID().toString();
+                imageService.upload(1L, nazwa, inputStream);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+    @GetMapping("/image/get/{imageId}")
+    public ResponseEntity<byte[]> downloadImage(@PathVariable("imageId") Long id) {
+        ByteArrayOutputStream downloadInputStream = imageService.download(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_PNG)
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + "kamil pietrak.jpeg" + "\"")
+                .body(downloadInputStream.toByteArray());
     }
 
 

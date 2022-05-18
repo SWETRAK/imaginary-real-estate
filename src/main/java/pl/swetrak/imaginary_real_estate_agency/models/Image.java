@@ -11,13 +11,13 @@ public class Image {
 
     @Id
     @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
+            name = "image_sequence",
+            sequenceName = "image_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
+            generator = "image_sequence"
     )
     private Long id;
     private Long offer_id;
