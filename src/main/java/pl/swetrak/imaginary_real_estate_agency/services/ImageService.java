@@ -9,8 +9,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.util.IOUtils;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,29 +21,31 @@ import pl.swetrak.imaginary_real_estate_agency.repositories.ImageRepository;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class ImageService {
 
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
     private final String bucketName = "spring-irea";
-    private String accessKey;
-    private String secretKey;
-    private final AWSCredentials credentials;
     private final AmazonS3 s3client;
 
     @Autowired
     public ImageService(ImageRepository imageRepository, Environment env) {
-        this.imageRepository = imageRepository;
-        this.accessKey = env.getProperty("AWS_ACCESS_KEY");
-        this.secretKey = env.getProperty("AWS_PRIVATE_KEY");
-        this.credentials = new BasicAWSCredentials(accessKey, secretKey);
-        this.s3client = AmazonS3ClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(Regions.EU_CENTRAL_1)
-                .build();
+        try {
+            this.imageRepository = imageRepository;
+            String accessKey = env.getProperty("AWS_ACCESS_KEY");
+            String secretKey = env.getProperty("AWS_PRIVATE_KEY");
+            AWSCredentials credentials = new BasicAWSCredentials(Objects.requireNonNull(accessKey), Objects.requireNonNull(secretKey));
+            this.s3client = AmazonS3ClientBuilder
+                    .standard()
+                    .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                    .withRegion(Regions.EU_CENTRAL_1)
+                    .build();
+        } catch (NullPointerException e) {
+            throw new IllegalStateException("AWS S3 error", e);
+        }
     }
 
     public void upload(Long offer_id, String filename, InputStream inputStream) {
@@ -68,7 +69,7 @@ public class ImageService {
                 S3Object object = s3client.getObject(bucketName, safeImage.getImageFileName());
                 InputStream inputStream = object.getObjectContent();
                 ByteArrayOutputStream output = new ByteArrayOutputStream();
-                Integer len;
+                int len;
                 byte[] buffer = new byte[4096];
                 while ((len = inputStream.read(buffer, 0, buffer.length)) != -1) {
                     output.write(buffer, 0, len);
