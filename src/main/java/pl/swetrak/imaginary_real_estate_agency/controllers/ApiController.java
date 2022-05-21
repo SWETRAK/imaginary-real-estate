@@ -1,8 +1,10 @@
 package pl.swetrak.imaginary_real_estate_agency.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import pl.swetrak.imaginary_real_estate_agency.models.FrontImage;
 import pl.swetrak.imaginary_real_estate_agency.models.Image;
 import pl.swetrak.imaginary_real_estate_agency.models.Offer;
@@ -91,10 +93,12 @@ public class ApiController {
     ){
         if(offerId.isPresent() && userEmail.isPresent()) {
 
-            Offer offer = offerService.getOfferById(offerId.get());
+            Optional<Offer> offer = offerService.getOfferById(offerId.get());
 
-            emailSenderService.sendEmail(offer.getEmail(), "Someone is interested into your offer", userEmail.get());
-            emailSenderService.sendEmail(userEmail.get(), "You're interest into some offers", offer.getEmail());
+            if(offer.isEmpty()) return Map.of("status", "failure");
+
+            emailSenderService.sendEmail(offer.get().getEmail(), "Someone is interested into your offer", userEmail.get());
+            emailSenderService.sendEmail(userEmail.get(), "You're interest into some offers", offer.get().getEmail());
 
             return Map.of("status", "success");
         }
