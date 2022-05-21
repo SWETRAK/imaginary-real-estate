@@ -11,6 +11,7 @@ import pl.swetrak.imaginary_real_estate_agency.models.Offer;
 import pl.swetrak.imaginary_real_estate_agency.services.ImageService;
 import pl.swetrak.imaginary_real_estate_agency.services.OfferService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,9 +34,11 @@ public class WebController {
 
     @GetMapping(path="/offers")
     public ModelAndView getOffers(Model model, @RequestParam("searchPhrase") Optional<String> city) {
-        ModelAndView modelAndview = new ModelAndView("offers");
-        modelAndview.addObject("offers", offerService.getOffersByCity(city));
-        return modelAndview;
+        ModelAndView modelAndView = new ModelAndView("offers");
+        List<Offer> offerList = offerService.getOffersByCity(city);
+        modelAndView.addObject("noOffers", offerList.isEmpty());
+        modelAndView.addObject("offers", offerList);
+        return modelAndView;
     }
 
     @GetMapping("/list")

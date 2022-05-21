@@ -46,6 +46,7 @@
 <div class="container">
 
 <!--   Offer banner  -->
+    {{ ^noOffers }}
     {{ #offers }}
     <div class="card my-margin">
         <div class="my-card-content">
@@ -67,7 +68,10 @@
         </div>
     </div>
     {{ /offers }}
-
+    {{ /noOffers }}
+    {{ #noOffers }}
+        <p>No offers</p>
+    {{ /noOffers }}
 
 
 <!--  /Offer banner  -->
