@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name="my_images")
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @ManyToOne
     private Offer offer;

@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Offer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="id")
     private Long id;
     private String title;
