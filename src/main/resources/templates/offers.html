@@ -46,35 +46,28 @@
 <div class="container">
 
 <!--   Offer banner  -->
-    {{ #offers.length  }}
-        {{ #offers }}
-        <div class="card my-margin">
-            <div class="my-card-content">
-                <div class="my-media">
-                    <figure class="my-400x300">
-                        <img src="https://spring-irea.s3.eu-central-1.amazonaws.com/{{ frontImage.imageFileName }}"
-                             alt="Placeholder image">
-                    </figure>
+    {{ #offers }}
+    <div class="card my-margin">
+        <div class="my-card-content">
+            <div class="my-media">
+                <figure class="my-400x300">
+                    <img src="https://spring-irea.s3.eu-central-1.amazonaws.com/{{ frontImage.imageFileName }}"
+                         alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="my-media-content">
+                <p class="title is-4">{{ title }}</p>
+                <p class="subtitle is-6">{{ address }}</p>
+                <p class="is-4"> Area: <strong>{{ area }}m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-bed"></i> <strong>{{ bedrooms }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-bath"></i> <strong>{{ bathrooms }}</strong></p>
+                <div class="content">
+                    {{ description }}
                 </div>
-                <div class="my-media-content">
-                    <p class="title is-4">{{ title }}</p>
-                    <p class="subtitle is-6">{{ address }}</p>
-                    <p class="is-4"> Area: <strong>{{ area }}m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-bed"></i> <strong>{{ bedrooms }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-bath"></i> <strong>{{ bathrooms }}</strong></p>
-                    <div class="content">
-                        {{ description }}
-                    </div>
-                    <a href="/details/{{ id }}" class="button is-info">Details</a>
-                </div>
+                <a href="/details/{{ id }}" class="button is-info">Details</a>
             </div>
         </div>
-        {{ /offers }}
-    {{ /offers.length }}
+    </div>
+    {{ /offers }}
 
-    {{ ^offers.length }}
-        <div class="">
-            <h2> Ups!!! No offers found for this search.</h2>
-        </div>
-    {{ /offers.length }}
 
 
 <!--  /Offer banner  -->
