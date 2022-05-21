@@ -8,7 +8,6 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.S3Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -17,11 +16,9 @@ import pl.swetrak.imaginary_real_estate_agency.models.Offer;
 import pl.swetrak.imaginary_real_estate_agency.repositories.FrontImageRepository;
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import java.util.Optional;
+
 
 @Service
 public class FrontImageService {
@@ -57,30 +54,6 @@ public class FrontImageService {
             return frontImageRepository.save(new FrontImage(offer, filename));
         } catch (AmazonServiceException e) {
             throw new IllegalStateException("Failed to upload the file", e);
-        }
-    }
-
-    public ByteArrayOutputStream download(Long image_id) {
-        Optional<FrontImage> optionalImage = frontImageRepository.findFrontImageById(image_id);
-        if(optionalImage.isPresent()) {
-            FrontImage safeImage = optionalImage.get();
-            try {
-                S3Object object = s3client.getObject(bucketName, safeImage.getImageFileName());
-                InputStream inputStream = object.getObjectContent();
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
-                int len;
-                byte[] buffer = new byte[4096];
-                while ((len = inputStream.read(buffer, 0, buffer.length)) != -1) {
-                    output.write(buffer, 0, len);
-                }
-                return output;
-            } catch (AmazonServiceException e) {
-                throw new IllegalStateException("Failed to download the file", e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            throw new IllegalStateException("Failed to download the file");
         }
     }
 }

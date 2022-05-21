@@ -28,13 +28,11 @@ public class OfferService {
     }
 
     public Optional<Offer> getOfferById(Long id) {
-        Optional<Offer> optionalOffer = offerRepository.findById(id);
-        return optionalOffer;
+        return offerRepository.findById(id);
     }
 
     public Offer saveOffer(Offer offer) {
-        Offer newOffer = offerRepository.save(offer);
-        return newOffer;
+        return offerRepository.save(offer);
     }
 
 }

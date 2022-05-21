@@ -1,10 +1,8 @@
 package pl.swetrak.imaginary_real_estate_agency.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 import pl.swetrak.imaginary_real_estate_agency.models.FrontImage;
 import pl.swetrak.imaginary_real_estate_agency.models.Image;
 import pl.swetrak.imaginary_real_estate_agency.models.Offer;
@@ -66,14 +64,14 @@ public class ApiController {
                     description.get()
             );
             offer = offerService.saveOffer(offer);
-            String frontPhotoName = UUID.randomUUID().toString() + ".jpeg";
+            String frontPhotoName = UUID.randomUUID() + ".jpeg";
             FrontImage fimg = frontImageService.upload(offer, frontPhotoName, new BufferedInputStream(frontPhoto.get().getInputStream()));
             offer.setFrontImage(fimg);
             List<Optional<MultipartFile>> additionalPhotos = List.of(addPhoto1, addPhoto2, addPhoto3, addPhoto4, addPhoto5);
             List<Image> list_of_images = new ArrayList<>();
             for(Optional<MultipartFile> photo: additionalPhotos) {
                 if(photo.isPresent()) {
-                    String name = UUID.randomUUID().toString() + ".jpeg";
+                    String name = UUID.randomUUID() + ".jpeg";
                     Image image = imageService.upload(offer, name, new BufferedInputStream(photo.get().getInputStream()));
                     list_of_images.add(image);
                 }
