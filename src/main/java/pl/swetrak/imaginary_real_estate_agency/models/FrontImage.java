@@ -3,25 +3,28 @@ package pl.swetrak.imaginary_real_estate_agency.models;
 import javax.persistence.*;
 import java.util.Objects;
 
-
 @Entity
-@Table(name="my_images")
-public class Image {
+@Table(name="my_front_images")
+public class FrontImage {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private Long id;
-    @ManyToOne
+    @OneToOne(mappedBy = "frontImage")
+    @JoinColumn(name="offer_id")
     private Offer offer;
     private String imageFileName;
 
-    public Image() {}
+    public FrontImage() {
+    }
 
-    public Image(Offer offer, String imageFileName) {
+    public FrontImage(Offer offer, String imageFileName) {
         this.offer = offer;
         this.imageFileName = imageFileName;
     }
 
-    public Image(Long id, Offer offer, String imageFileName) {
+    public FrontImage(Long id, Offer offer, String imageFileName) {
         this.id = id;
         this.offer = offer;
         this.imageFileName = imageFileName;
@@ -35,11 +38,11 @@ public class Image {
         this.id = id;
     }
 
-    public Offer getOffer() {
+    public Offer getOffer_id() {
         return offer;
     }
 
-    public void setOffer(Offer offer) {
+    public void setOffer_id(Offer offer) {
         this.offer = offer;
     }
 
@@ -56,11 +59,11 @@ public class Image {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Image image = (Image) o;
+        FrontImage that = (FrontImage) o;
 
-        if (!Objects.equals(id, image.id)) return false;
-        if (!Objects.equals(offer, image.offer)) return false;
-        return Objects.equals(imageFileName, image.imageFileName);
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(offer, that.offer)) return false;
+        return Objects.equals(imageFileName, that.imageFileName);
     }
 
     @Override
@@ -73,7 +76,7 @@ public class Image {
 
     @Override
     public String toString() {
-        return "Image{" +
+        return "FrontImage{" +
                 "id=" + id +
                 ", imageFileName='" + imageFileName + '\'' +
                 '}';

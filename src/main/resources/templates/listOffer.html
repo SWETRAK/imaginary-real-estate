@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/css/bulma.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://irea-static-files-server.herokuapp.com/public/css/bulma.min.css">
+    <link rel="stylesheet" href="https://irea-static-files-server.herokuapp.com/public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
           integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -20,14 +20,18 @@
 
 <!--  /NAV BAR  -->
 
+<div class="my-notifications" id="notifications">
+
+</div>
+
 <!--  HELLO BANNER  -->
-<section class="hero is-warning is-medium">
+<section class="hero is-warning is-medium" style="background-image: url(https://irea-static-files-server.herokuapp.com/public/img/pexelsListOfferBackground.jpg); background-size: cover">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title">
+            <h1 class="title has-text-white">
                 List your offer now and reach the client faster.
             </h1>
-            <h2 class="subtitle">
+            <h2 class="subtitle has-text-white">
                 Get noticed in the real estate market
             </h2>
         </div>
@@ -40,7 +44,7 @@
 <!--  TODO: Add form validation  -->
 <div class="container">
     <div class="my-margin">
-        <form action="#" method="post">
+        <form method="post">
 
             <div class="columns">
                 <div class="column is-half-desktop">
@@ -70,7 +74,7 @@
                     <div class="field">
                         <label class="label">Apartment Area</label>
                         <div class="control">
-                            <input class="input" type="number" name="apartment_area" id="apartment_area"
+                            <input class="input" type="number" name="area" id="area"
                                    placeholder="Apartment Area">
                         </div>
                     </div>
@@ -99,7 +103,7 @@
                         <label class="label">Bathrooms</label>
                         <div class="control has-icons-left">
                             <div class="select is-fullwidth">
-                                <select name="bathrooms" id="bathrooms">
+                                <select name="bagthrooms" id="bathrooms">
                                     <option value="1" selected>1</option>
                                     <option value="1.5">1.5</option>
                                     <option value="2">2</option>
@@ -151,7 +155,7 @@
 
                 </div>
 
-<!--        IMAGES        -->
+                <!--        IMAGES        -->
 
                 <div class="column">
                     <div class="field">
@@ -163,12 +167,12 @@
                                 <span class="file-icon">
                                     <i class="fas fa-upload"></i>
                                 </span>
-                                <span class="file-label">
+                                <span class="file-label" >
                                     Choose front image
                                 </span>
                             </span>
-                                <span class="file-name">
-                                None
+                                <span class="file-name" id="front_photo_label">
+                                Doesn't selected
                             </span>
                             </label>
                         </div>
@@ -189,8 +193,8 @@
                                     Choose additional image
                                 </span>
                                 </span>
-                                <span class="file-name">
-                                    None
+                                    <span class="file-name" id="add_photo1_label">
+                                    Doesn't selected
                                 </span>
                                 </label>
                             </div>
@@ -208,8 +212,8 @@
                                     Choose additional image
                                 </span>
                                 </span>
-                                    <span class="file-name">
-                                    None
+                                    <span class="file-name" id="add_photo2_label">
+                                    Doesn't selected
                                 </span>
                                 </label>
                             </div>
@@ -227,8 +231,8 @@
                                     Choose additional image
                                 </span>
                                 </span>
-                                    <span class="file-name">
-                                    None
+                                    <span class="file-name" id="add_photo3_label">
+                                    Doesn't selected
                                 </span>
                                 </label>
                             </div>
@@ -246,8 +250,8 @@
                                     Choose additional image
                                 </span>
                                 </span>
-                                    <span class="file-name">
-                                    None
+                                    <span class="file-name" id="add_photo4_label">
+                                    Doesn't selected
                                 </span>
                                 </label>
                             </div>
@@ -265,8 +269,8 @@
                                     Choose additional image
                                 </span>
                                 </span>
-                                    <span class="file-name">
-                                    None
+                                    <span class="file-name" id="add_photo5_label">
+                                    Doesn't selected
                                 </span>
                                 </label>
                             </div>
@@ -276,7 +280,7 @@
             </div>
             <div class="field is-grouped is-grouped-right">
                 <div class="control">
-                    <input type="submit" class="button is-success" value="List Offer">
+                    <input type="submit" id="submit_button" class="button is-success" value="List Offer" >
                 </div>
                 <div class="control">
                     <input type="reset" class="button is-link is-light" value="Cancel">
@@ -294,6 +298,11 @@
 <!--  FOOTER  -->
 {{> parts/footer}}
 <!--  /FOTTER  -->
+
+<script src="https://irea-static-files-server.herokuapp.com/public/js/navbarBurger.js"></script>
+<script src="https://irea-static-files-server.herokuapp.com/public/js/notification.js"></script>
+<script src="https://irea-static-files-server.herokuapp.com/public/js/offerForm.js"></script>
+
 
 </body>
 </html>

@@ -9,15 +9,13 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import pl.swetrak.imaginary_real_estate_agency.models.Image;
+import pl.swetrak.imaginary_real_estate_agency.models.FrontImage;
 import pl.swetrak.imaginary_real_estate_agency.models.Offer;
-import pl.swetrak.imaginary_real_estate_agency.repositories.ImageRepository;
+import pl.swetrak.imaginary_real_estate_agency.repositories.FrontImageRepository;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,16 +24,16 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class ImageService {
+public class FrontImageService {
 
-    private final ImageRepository imageRepository;
+    private final FrontImageRepository frontImageRepository;
     private final String bucketName = "spring-irea";
     private final AmazonS3 s3client;
 
     @Autowired
-    public ImageService(ImageRepository imageRepository, Environment env) {
+    public FrontImageService(FrontImageRepository frontImageRepository, Environment env) {
         try {
-            this.imageRepository = imageRepository;
+            this.frontImageRepository = frontImageRepository;
             String accessKey = env.getProperty("AWS_ACCESS_KEY");
             String secretKey = env.getProperty("AWS_PRIVATE_KEY");
             AWSCredentials credentials = new BasicAWSCredentials(Objects.requireNonNull(accessKey), Objects.requireNonNull(secretKey));
@@ -49,23 +47,23 @@ public class ImageService {
         }
     }
 
-    public Image upload(Offer offer, String filename, InputStream inputStream) {
+    public FrontImage upload(Offer offer, String filename, InputStream inputStream) {
         try {
             s3client.putObject(bucketName,
                     filename,
                     inputStream,
                     new ObjectMetadata()
             );
-            return imageRepository.save(new Image(offer, filename));
+            return frontImageRepository.save(new FrontImage(offer, filename));
         } catch (AmazonServiceException e) {
             throw new IllegalStateException("Failed to upload the file", e);
         }
     }
 
     public ByteArrayOutputStream download(Long image_id) {
-        Optional<Image> optionalImage = imageRepository.findImageById(image_id);
+        Optional<FrontImage> optionalImage = frontImageRepository.findFrontImageById(image_id);
         if(optionalImage.isPresent()) {
-            Image safeImage = optionalImage.get();
+            FrontImage safeImage = optionalImage.get();
             try {
                 S3Object object = s3client.getObject(bucketName, safeImage.getImageFileName());
                 InputStream inputStream = object.getObjectContent();

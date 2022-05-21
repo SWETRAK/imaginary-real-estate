@@ -1,22 +1,16 @@
 package pl.swetrak.imaginary_real_estate_agency.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="offers")
+@Table(name="my_offers")
 public class Offer {
 
     @Id
-    @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private Long id;
     private String title;
     private String email;
@@ -27,8 +21,16 @@ public class Offer {
     private Integer area;
     private String description;
 
-    public Offer() {
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "frontImage_id")
+    private FrontImage frontImage;
+
+    @OneToMany(mappedBy = "offer")
+    private List<Image> images;
+
+
+    public Offer() {
     }
 
     public Offer(String title, String email, String address, Integer price, Integer bedrooms, Float bathrooms, Integer area, String description) {
@@ -42,7 +44,20 @@ public class Offer {
         this.description = description;
     }
 
-    public Offer(Long id, String title, String email, String address, Integer price, Integer bedrooms, Float bathrooms, Integer area, String description) {
+    public Offer(String title, String email, String address, Integer price, Integer bedrooms, Float bathrooms, Integer area, String description, FrontImage frontImage, List<Image> images) {
+        this.title = title;
+        this.email = email;
+        this.address = address;
+        this.price = price;
+        this.bedrooms = bedrooms;
+        this.bathrooms = bathrooms;
+        this.area = area;
+        this.description = description;
+        this.frontImage = frontImage;
+        this.images = images;
+    }
+
+    public Offer(Long id, String title, String email, String address, Integer price, Integer bedrooms, Float bathrooms, Integer area, String description, FrontImage frontImage, List<Image> images) {
         this.id = id;
         this.title = title;
         this.email = email;
@@ -52,6 +67,16 @@ public class Offer {
         this.bathrooms = bathrooms;
         this.area = area;
         this.description = description;
+        this.frontImage = frontImage;
+        this.images = images;
+    }
+
+    public FrontImage getFrontImage() {
+        return frontImage;
+    }
+
+    public void setFrontImage(FrontImage frontImage) {
+        this.frontImage = frontImage;
     }
 
     public Long getId() {
@@ -126,41 +151,30 @@ public class Offer {
         this.description = description;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Offer offers = (Offer) o;
-
-        if (!Objects.equals(id, offers.id)) return false;
-        if (!Objects.equals(title, offers.title)) return false;
-        if (!Objects.equals(email, offers.email)) return false;
-        if (!Objects.equals(address, offers.address)) return false;
-        if (!Objects.equals(price, offers.price)) return false;
-        if (!Objects.equals(bedrooms, offers.bedrooms)) return false;
-        if (!Objects.equals(bathrooms, offers.bathrooms)) return false;
-        if (!Objects.equals(area, offers.area)) return false;
-        return Objects.equals(description, offers.description);
+        Offer offer = (Offer) o;
+        return Objects.equals(id, offer.id) && Objects.equals(title, offer.title) && Objects.equals(email, offer.email) && Objects.equals(address, offer.address) && Objects.equals(price, offer.price) && Objects.equals(bedrooms, offer.bedrooms) && Objects.equals(bathrooms, offer.bathrooms) && Objects.equals(area, offer.area) && Objects.equals(description, offer.description) && Objects.equals(frontImage, offer.frontImage) && Objects.equals(images, offer.images);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (bedrooms != null ? bedrooms.hashCode() : 0);
-        result = 31 * result + (bathrooms != null ? bathrooms.hashCode() : 0);
-        result = 31 * result + (area != null ? area.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        return Objects.hash(id, title, email, address, price, bedrooms, bathrooms, area, description, frontImage, images);
     }
 
     @Override
     public String toString() {
-        return "Offers{" +
+        return "Offer{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", email='" + email + '\'' +
@@ -170,6 +184,8 @@ public class Offer {
                 ", bathrooms=" + bathrooms +
                 ", area=" + area +
                 ", description='" + description + '\'' +
+                ", frontImage=" + frontImage +
+                ", images=" + images +
                 '}';
     }
 }
