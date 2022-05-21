@@ -19,6 +19,8 @@ public class Offer {
     private Integer bedrooms;
     private Float bathrooms;
     private Integer area;
+
+    @Column(name="description", length = 2048)
     private String description;
 
 
