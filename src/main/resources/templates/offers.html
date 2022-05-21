@@ -48,7 +48,6 @@
 <!--   Offer banner  -->
     {{ #offers }}
     <div class="card my-margin">
-        <a href="/details/{{ id }}" class="has-text-black">
             <div class="my-card-content">
                 <div class="my-media">
                     <figure class=" my-400x300">
@@ -63,9 +62,10 @@
                     <div class="content">
                         {{ description }}
                     </div>
+
+                    <a href="/details/{{ id }}" class="has-text-black">
                 </div>
             </div>
-        </a>
     </div>
     {{ /offers }}
 
