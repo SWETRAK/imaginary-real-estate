@@ -33,7 +33,8 @@ public class WebController {
     public ModelAndView getOffers(Model model, @RequestParam("searchPhrase") Optional<String> city) {
         ModelAndView modelAndView = new ModelAndView("offers");
         List<Offer> offerList = offerService.getOffersByCity(city);
-//        modelAndView.addObject("searchPhase", city);
+        if(city.isPresent()) modelAndView.addObject("searchPhase", city.get());
+        else modelAndView.addObject("searchPhase", "");
         modelAndView.addObject("noOffers", offerList.isEmpty());
         modelAndView.addObject("offers", offerList);
         return modelAndView;
