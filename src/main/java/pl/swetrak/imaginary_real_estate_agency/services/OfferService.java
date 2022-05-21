@@ -27,13 +27,9 @@ public class OfferService {
         }
     }
 
-    public Offer getOfferById(Long id) {
+    public Optional<Offer> getOfferById(Long id) {
         Optional<Offer> optionalOffer = offerRepository.findById(id);
-        if (optionalOffer.isEmpty()) {
-            return new Offer();
-        } else {
-            return optionalOffer.get();
-        }
+        return optionalOffer;
     }
 
     public Offer saveOffer(Offer offer) {

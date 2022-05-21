@@ -1,9 +1,11 @@
 package pl.swetrak.imaginary_real_estate_agency.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 import pl.swetrak.imaginary_real_estate_agency.models.Offer;
 import pl.swetrak.imaginary_real_estate_agency.services.ImageService;
@@ -44,13 +46,9 @@ public class WebController {
     @GetMapping("/details/{offerId}")
     public ModelAndView getOfferDetails(@PathVariable Long offerId) {
         ModelAndView modelAndView = new ModelAndView("details");
-        Offer oferta = offerService.getOfferById(offerId);
-        modelAndView.addObject("offer", oferta);
-        System.out.println(oferta);
+        Optional<Offer> offer= offerService.getOfferById(offerId);
+        if(offer.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+        modelAndView.addObject("offer", offer.get());
         return modelAndView;
     }
-
-
-
-
 }
