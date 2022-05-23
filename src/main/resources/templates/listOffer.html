@@ -55,6 +55,7 @@
                         <div class="control">
                             <input class="input" type="text" name="title" id="title" placeholder="Title">
                         </div>
+                        <p class="help is-danger is-hidden" id="title-message">Title field can't be empty</p>
                     </div>
                     <!--    ADDRESS  -->
                     <div class="field">
@@ -62,21 +63,24 @@
                         <div class="control">
                             <input class="input" type="text" name="address" id="address" placeholder="Address">
                         </div>
+                        <p class="help is-danger is-hidden" id="address-message">Address field can't be empty</p>
                     </div>
                     <!--    PRICE    -->
                     <div class="field">
-                        <label class="label">Price</label>
+                        <label class="label">Price (PLN)</label>
                         <div class="control">
                             <input class="input" type="number" name="price" id="price" placeholder="Price">
                         </div>
+                        <p class="help is-danger is-hidden" id="price-message">Price field can't be empty</p>
                     </div>
                     <!--    AREA Apartment   -->
                     <div class="field">
-                        <label class="label">Apartment Area</label>
+                        <label class="label">Apartment Area (m2)</label>
                         <div class="control">
                             <input class="input" type="number" name="area" id="area"
                                    placeholder="Apartment Area">
                         </div>
+                        <p class="help is-danger is-hidden" id="area-message">Area field can't be empty</p>
                     </div>
 
                     <!--    BEDROOMS    -->
@@ -129,6 +133,7 @@
                             <textarea class="textarea" name="description" id="description"
                                       placeholder="Apartment description"></textarea>
                         </div>
+                        <p class="help is-danger is-hidden" id="description-message">Description field can't be empty</p>
                     </div>
 
 
@@ -138,10 +143,10 @@
                         <div class="control has-icons-left has-icons-right">
                             <input class="input" type="email" name="email" id="email" placeholder="Email input">
                             <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                </span>
+                                <i class="fas fa-envelope"></i>
+                            </span>
                         </div>
-                        <!--            <p class="help is-danger">This email is invalid</p>-->
+                        <p class="help is-danger is-hidden" id="email-message">This email is invalid</p>
                     </div>
 
                     <div class="field">

@@ -15,7 +15,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.*;
 
-
 @RestController
 @RequestMapping(path="/api/v1/")
 public class ApiController {
