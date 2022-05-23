@@ -53,7 +53,7 @@ public class ApiController {
             @RequestParam("add_photo4") Optional<MultipartFile> addPhoto4,
             @RequestParam("add_photo5") Optional<MultipartFile> addPhoto5
     ) throws IOException {
-        if(title.isPresent() && email.isPresent() && address.isPresent() && price.isPresent() && area.isPresent() && bedrooms.isPresent() && bathrooms.isPresent() && description.isPresent() && terms.isPresent() && frontPhoto.isPresent()) {
+        if (title.isPresent() && email.isPresent() && address.isPresent() && price.isPresent() && area.isPresent() && bedrooms.isPresent() && bathrooms.isPresent() && description.isPresent() && terms.isPresent() && frontPhoto.isPresent()) {
             Offer offer = new Offer(
                     title.get(),
                     email.get(),
@@ -70,8 +70,8 @@ public class ApiController {
             offer.setFrontImage(fimg);
             List<Optional<MultipartFile>> additionalPhotos = List.of(addPhoto1, addPhoto2, addPhoto3, addPhoto4, addPhoto5);
             List<Image> list_of_images = new ArrayList<>();
-            for(Optional<MultipartFile> photo: additionalPhotos) {
-                if(photo.isPresent()) {
+            for (Optional<MultipartFile> photo : additionalPhotos) {
+                if (photo.isPresent()) {
                     String name = UUID.randomUUID() + ".jpeg";
                     Image image = imageService.upload(offer, name, new BufferedInputStream(photo.get().getInputStream()));
                     list_of_images.add(image);
@@ -80,9 +80,11 @@ public class ApiController {
             offer.setImages(list_of_images);
             offerService.saveOffer(offer);
             return Map.of("status", "success");
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
     }
+
 
     @PostMapping("/send/email/{offerId}")
     Map<String, Object> sendEmail(
@@ -99,8 +101,9 @@ public class ApiController {
             emailSenderService.sendEmail(userEmail.get(), "You're interest into some offers", offer.get().getEmail());
 
             return Map.of("status", "success");
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
-    }
 
+    }
 }
