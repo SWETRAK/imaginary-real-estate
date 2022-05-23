@@ -1,8 +1,10 @@
 package pl.swetrak.imaginary_real_estate_agency.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import pl.swetrak.imaginary_real_estate_agency.models.FrontImage;
 import pl.swetrak.imaginary_real_estate_agency.models.Image;
 import pl.swetrak.imaginary_real_estate_agency.models.Offer;
@@ -78,9 +80,8 @@ public class ApiController {
             offer.setImages(list_of_images);
             offerService.saveOffer(offer);
             return Map.of("status", "success");
-        } else {
-            return Map.of("status", "failure");
         }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
     }
 
     @PostMapping("/send/email/{offerId}")
@@ -99,7 +100,7 @@ public class ApiController {
 
             return Map.of("status", "success");
         }
-        return Map.of("status", "failure");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
     }
 
 }
