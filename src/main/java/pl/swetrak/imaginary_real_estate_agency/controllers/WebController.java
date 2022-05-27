@@ -48,7 +48,7 @@ public class WebController {
     @GetMapping("/details/{offerId}")
     public ModelAndView getOfferDetails(@PathVariable Long offerId) {
         ModelAndView modelAndView = new ModelAndView("details");
-        Optional<Offer> offer= offerService.getOfferById(offerId);
+        Optional<Offer> offer = offerService.getOfferById(offerId);
         if(offer.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
         modelAndView.addObject("offer", offer.get());
         return modelAndView;
