@@ -65,6 +65,7 @@
                 <button class="modal-close is-large" aria-label="close"></button>
             </div>
 
+
         </div>
     </div>
     <hr class="my-solid-divider">
@@ -117,15 +118,13 @@
 </div>
 
 
-<!---->
+<!--  GOOGLE MAPS  -->
 <div class="container mt-5">
     <h2 class="subtitle">Localization</h2>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2494.9314812657135!2d22.377963316089648!3d51.29398497960066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47225e8ee8bb4bf5%3A0xcfc1991b6e4b248c!2sSieprawki%2013A%2C%2021-008%20Sieprawice!5e0!3m2!1spl!2spl!4v1652779797265!5m2!1spl!2spl" style="border:0; width: 100%; height: 450px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://maps.google.com/maps?&amp;q={{ offer.address }}&amp;output=embed'" style="border:0; width: 100%; height: 450px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 
-
 <!--  / CONTENT  -->
-
 <!--  FOOTER  -->
 {{> parts/footer}}
 <!--  /FOTTER  -->
@@ -134,7 +133,6 @@
 <script src="/public/js/navbarBurger.js"></script>
 <script src="/public/js/notification.js"></script>
 <script src="/public/js/contactForm.js"></script>
-
 
 </body>
 </html>
