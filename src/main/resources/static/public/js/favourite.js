@@ -47,7 +47,7 @@ const loadContent = () => {
     myHeaders.append("Content-Type", "application/json");
 
     const requestOptions = {
-        method: 'GET',
+        method: 'POST',
         headers: myHeaders,
         body: liked,
         redirect: 'follow'

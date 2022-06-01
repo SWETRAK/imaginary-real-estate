@@ -35,7 +35,7 @@ public class ApiController {
         this.emailSenderService = emailSenderService;
     }
 
-    @GetMapping("/get/liked")
+    @PostMapping("/get/liked")
     List<Offer> getLikedOffers(@RequestBody Optional<List<Long>> ids) {
         return offerService.getOfferByIdInRange(ids);
     }
