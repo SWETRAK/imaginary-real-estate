@@ -1,5 +1,7 @@
 package pl.swetrak.imaginary_real_estate_agency.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -38,11 +40,12 @@ public class FrontImage {
         this.id = id;
     }
 
-    public Offer getOffer_id() {
+    @JsonIgnore
+    public Offer getOffer() {
         return offer;
     }
 
-    public void setOffer_id(Offer offer) {
+    public void setOffer(Offer offer) {
         this.offer = offer;
     }
 

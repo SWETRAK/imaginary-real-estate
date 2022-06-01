@@ -1,5 +1,7 @@
 package pl.swetrak.imaginary_real_estate_agency.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -35,6 +37,7 @@ public class Image {
         this.id = id;
     }
 
+    @JsonIgnore
     public Offer getOffer() {
         return offer;
     }
