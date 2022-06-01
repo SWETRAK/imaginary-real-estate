@@ -35,42 +35,51 @@ const removeLike = (offer) => {
 }
 
 const loadContent = () => {
+    const liked = localStorage.getItem(likedKey);
+    if(liked === null) {
+        return;
+    }
 
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
+    const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        body: liked,
+        redirect: 'follow'
+    };
 
-
-
-
-}
-
-document.onload = () => {
-
-// <div className="card my-margin">
-//         <div className="my-card-content">
-//             <div className="my-media">
-//                 <figure className="my-400x300">
-//                     <img src="https://spring-irea.s3.eu-central-1.amazonaws.com/{{ frontImage.imageFileName }}"
-//                          alt="Placeholder image">
-//                 </figure>
-//             </div>
-//             <div className="my-media-content">
-//                 <p className="title is-4">{{title}}</p>
-//                 <p className="subtitle is-6">{{address}}</p>
-//                 <p className="is-4"> Area: <strong>{{area}}m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-//                     className="fa-solid fa-bed"></i> <strong>{{bedrooms}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-//                     className="fa-solid fa-bath"></i> <strong>{{bathrooms}}</strong></p>
-//                 <div className="content">
-//                     {{description}}
-//                 </div>
-//                 <a href="/details/{{ id }}" className="button is-info">Details</a>
-//                 <br>
-//                     <button className="button is-success" onClick="addLike({{ id }})">Like</button>
-//             </div>
-//         </div>
-//     </div>
-//
-
-
-
-
+    fetch("https://irea-app.herokuapp.com/api/v1/get/liked", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            let myDiv = document.getElementById("dynamic-content");
+            console.log(result);
+            result.forEach((offer) => {
+                document.getElementById("dynamic-content").innerHTML += "" +
+                    "    <div className=\"card my-margin\">\n" +
+                    "        <div className=\"my-card-content\">\n" +
+                    "            <div className=\"my-media\">\n" +
+                    "                <figure className=\"my-400x300\">\n" +
+                    "                    <img src=\"https://spring-irea.s3.eu-central-1.amazonaws.com/"+ offer.frontImage.imageFileName +"\"\n" +
+                    "                         alt=\"Placeholder image\">\n" +
+                    "                </figure>\n" +
+                    "            </div>\n" +
+                    "            <div className=\"my-media-content\">\n" +
+                    "                <p className=\"title is-4\">" + offer.title + "</p>\n" +
+                    "                <p className=\"subtitle is-6\">" + offer.address + "</p>\n" +
+                    "                <p className=\"is-4\"> Area: <strong>" + offer.area + "m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n" +
+                    "                    className=\"fa-solid fa-bed\"></i> <strong>" + offer.bedrooms + "</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n" +
+                    "                    className=\"fa-solid fa-bath\"></i> <strong>" + offer.bathrooms + "</strong></p>\n" +
+                    "                <div className=\"content\">\n" + offer.description + "\n" +
+                    "                </div>\n" +
+                    "                <a href=\"/details/" + offer.id + "\" className=\"button is-info\">Details</a>\n" +
+                    "                <br>\n" +
+                    "                    <button className=\"button is-danger\" onClick=\"removeLike(" + offer.id + ")\">Unlike</button>\n" +
+                    "            </div>\n" +
+                    "        </div>\n" +
+                    "    </div>"
+            })
+        })
+        .catch(error => console.log('error', error));
 }
