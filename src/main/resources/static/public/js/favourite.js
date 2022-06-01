@@ -61,25 +61,25 @@ const loadContent = () => {
             console.log(result);
             result.forEach((offer) => {
                 myDiv.innerHTML += "" +
-                    "    <div className=\"card my-margin\">\n" +
-                    "        <div className=\"my-card-content\">\n" +
-                    "            <div className=\"my-media\">\n" +
-                    "                <figure className=\"my-400x300\">\n" +
+                    "    <div class=\"card my-margin\">\n" +
+                    "        <div class=\"my-card-content\">\n" +
+                    "            <div class=\"my-media\">\n" +
+                    "                <figure class=\"my-400x300\">\n" +
                     "                    <img src=\"https://spring-irea.s3.eu-central-1.amazonaws.com/"+ offer.frontImage.imageFileName +"\"\n" +
                     "                         alt=\"Placeholder image\">\n" +
                     "                </figure>\n" +
                     "            </div>\n" +
-                    "            <div className=\"my-media-content\">\n" +
-                    "                <p className=\"title is-4\">" + offer.title + "</p>\n" +
-                    "                <p className=\"subtitle is-6\">" + offer.address + "</p>\n" +
-                    "                <p className=\"is-4\"> Area: <strong>" + offer.area + "m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n" +
-                    "                    className=\"fa-solid fa-bed\"></i> <strong>" + offer.bedrooms + "</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n" +
-                    "                    className=\"fa-solid fa-bath\"></i> <strong>" + offer.bathrooms + "</strong></p>\n" +
-                    "                <div className=\"content\">\n" + offer.description + "\n" +
+                    "            <div class=\"my-media-content\">\n" +
+                    "                <p class=\"title is-4\">" + offer.title + "</p>\n" +
+                    "                <p class=\"subtitle is-6\">" + offer.address + "</p>\n" +
+                    "                <p class=\"is-4\"> Area: <strong>" + offer.area + "m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n" +
+                    "                    class=\"fa-solid fa-bed\"></i> <strong>" + offer.bedrooms + "</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n" +
+                    "                    class=\"fa-solid fa-bath\"></i> <strong>" + offer.bathrooms + "</strong></p>\n" +
+                    "                <div class=\"content\">\n" + offer.description + "\n" +
                     "                </div>\n" +
-                    "                <a href=\"/details/" + offer.id + "\" className=\"button is-info\">Details</a>\n" +
+                    "                <a href=\"/details/" + offer.id + "\" class=\"button is-info\">Details</a>\n" +
                     "                <br>\n" +
-                    "                    <button className=\"button is-danger\" onClick=\"removeLike(" + offer.id + ")\">Unlike</button>\n" +
+                    "                    <button class=\"button is-danger\" onClick=\"removeLike(" + offer.id + ")\">Unlike</button>\n" +
                     "            </div>\n" +
                     "        </div>\n" +
                     "    </div>"
