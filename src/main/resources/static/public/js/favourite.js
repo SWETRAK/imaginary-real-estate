@@ -37,8 +37,11 @@ const removeLike = (offer) => {
 const loadContent = () => {
     const liked = localStorage.getItem(likedKey);
     if(liked === null) {
+        console.log("brak zgloszeń");
         return;
     }
+
+    console.log("sa zgloszenia");
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -54,9 +57,10 @@ const loadContent = () => {
         .then(response => response.json())
         .then(result => {
             let myDiv = document.getElementById("dynamic-content");
+            myDiv.innerHTML = "";
             console.log(result);
             result.forEach((offer) => {
-                document.getElementById("dynamic-content").innerHTML += "" +
+                myDiv.innerHTML += "" +
                     "    <div className=\"card my-margin\">\n" +
                     "        <div className=\"my-card-content\">\n" +
                     "            <div className=\"my-media\">\n" +
