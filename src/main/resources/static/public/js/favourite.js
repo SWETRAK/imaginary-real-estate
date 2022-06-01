@@ -27,7 +27,7 @@ const removeLike = (offer) => {
     let liked = localStorage.getItem(likedKey);
     let likedJSON = JSON.parse(liked);
     likedJSON = likedJSON.filter((value) => {
-        return value.name !== offer.name; // zostaw wszystko co nie jest tym czego szukamy
+        return value !== offer; // zostaw wszystko co nie jest tym czego szukamy
     });
     let newLiked = JSON.stringify(likedJSON);
     localStorage.setItem(likedKey, newLiked);
