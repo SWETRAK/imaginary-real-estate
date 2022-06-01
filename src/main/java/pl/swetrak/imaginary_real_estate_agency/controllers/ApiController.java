@@ -2,6 +2,7 @@ package pl.swetrak.imaginary_real_estate_agency.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -34,8 +35,13 @@ public class ApiController {
         this.emailSenderService = emailSenderService;
     }
 
+    @GetMapping("/get/liked")
+    ResponseEntity<List<Offer>> getLikedOfferes(@RequestBody Optional<List<Long>> ids) {
+        return ResponseEntity.ok(offerService.getOfferByIdInRange(ids));
+    }
+
     @PostMapping("/create")
-    Map<String, Object> createOffer(
+    ResponseEntity<Map<String, Object>> createOffer(
             @RequestParam("title") Optional<String> title,
             @RequestParam("email") Optional<String> email,
             @RequestParam("address") Optional<String> address,
@@ -79,7 +85,7 @@ public class ApiController {
             }
             offer.setImages(list_of_images);
             offerService.saveOffer(offer);
-            return Map.of("status", "success");
+            return ResponseEntity.ok(Map.of("message", "success"));
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
         }
@@ -87,7 +93,7 @@ public class ApiController {
 
 
     @PostMapping("/send/email/{offerId}")
-    Map<String, Object> sendEmail(
+    ResponseEntity<Map<String, Object>> sendEmail(
             @PathVariable("offerId") Optional<Long> offerId,
             @RequestParam("email") Optional<String> userEmail
     ){
@@ -95,15 +101,16 @@ public class ApiController {
 
             Optional<Offer> offer = offerService.getOfferById(offerId.get());
 
-            if(offer.isEmpty()) return Map.of("status", "failure");
+            if(offer.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
 
             emailSenderService.sendEmail(offer.get().getEmail(), "Someone is interested into your offer", userEmail.get());
             emailSenderService.sendEmail(userEmail.get(), "You're interest into some offers", offer.get().getEmail());
 
-            return Map.of("status", "success");
+            return ResponseEntity.ok(Map.of("message", "success"));
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
         }
 
     }
+
 }

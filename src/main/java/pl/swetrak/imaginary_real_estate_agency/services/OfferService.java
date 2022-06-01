@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.swetrak.imaginary_real_estate_agency.models.Offer;
 import pl.swetrak.imaginary_real_estate_agency.repositories.OfferRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +22,17 @@ public class OfferService {
     public List<Offer> getOffersByCity(Optional<String> city) {
         if (city.isEmpty()) {
             return offerRepository.findAll();
-        } else {
-            String citySafe = city.get();
-            return offerRepository.findOffersByAddressContains(citySafe);
         }
+        String citySafe = city.get();
+        return offerRepository.findOffersByAddressContains(citySafe);
+    }
+
+    public List<Offer> getOfferByIdInRange(Optional<List<Long>> ids) {
+        if (ids.isEmpty()) {
+            return new ArrayList<Offer>();
+        }
+        List<Long> safeId = ids.get();
+        return offerRepository.findOffersByIdIn(safeId);
     }
 
     public Optional<Offer> getOfferById(Long id) {

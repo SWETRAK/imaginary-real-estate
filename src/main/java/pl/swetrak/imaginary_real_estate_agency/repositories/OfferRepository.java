@@ -13,4 +13,7 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
     @Query("select o from Offer o where o.address like concat('%', ?1, '%')")
     List<Offer> findOffersByAddressContains(String address);
 
+    @Query("select o from Offer o where o.id in ?1")
+    List<Offer> findOffersByIdIn(List<Long> id);
+    
 }
