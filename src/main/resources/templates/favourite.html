@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/public/css/bulma.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Imaginary Real Estate</title>
+</head>
+<body>
+
+<!--  NAV BAR  -->
+<!-- TODO: change logo -->
+{{> parts/navbar }}
+
+<!--  /NAV BAR  -->
+<!--  HELLO BANNER  -->
+<section class="hero is-warning is-small" style="background-image: url(/public/img/pexelsOffersBackground.jpg); background-size: cover; background-position: center">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title has-text-white">
+                Your favourite places
+            </h1>
+        </div>
+    </div>
+</section>
+<!--  /HELLO BANNER  -->
+
+
+<!--  CONTENT  -->
+<div class="container">
+
+    <!--   Offer banner  -->
+    {{ ^noOffers }}
+    {{ #offers }}
+    <div class="card my-margin">
+        <div class="my-card-content">
+            <div class="my-media">
+                <figure class="my-400x300">
+                    <img src="https://spring-irea.s3.eu-central-1.amazonaws.com/{{ frontImage.imageFileName }}"
+                         alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="my-media-content">
+                <p class="title is-4">{{ title }}</p>
+                <p class="subtitle is-6">{{ address }}</p>
+                <p class="is-4"> Area: <strong>{{ area }}m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-bed"></i> <strong>{{ bedrooms }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-bath"></i> <strong>{{ bathrooms }}</strong></p>
+                <div class="content">
+                    {{ description }}
+                </div>
+                <a href="/details/{{ id }}" class="button is-info">Details</a>
+                <br>
+                <button class="button is-success" onclick="addLike({{ id }})">Like</button>
+            </div>
+        </div>
+    </div>
+    {{ /offers }}
+    {{ /noOffers }}
+
+
+    {{ #noOffers }}
+    <div class="my-margin">
+        <div class="notification is-danger">
+            <h2 class="subtitle has-text-white">Ups!!! There is no results for: {{ searchPhase }}</h2>
+        </div>
+    </div>
+    {{ /noOffers }}
+
+
+    <!--  /Offer banner  -->
+
+</div>
+<!--  / CONTENT  -->
+
+<!--  FOOTER  -->
+{{> parts/footer}}
+<!--  /FOTTER  -->
+
+<script src="/public/js/navbarBurger.js"></script>
+<script src="/public/js/favourite.js"></script>
+
+</body>
+</html>

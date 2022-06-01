@@ -32,6 +32,7 @@ public class OfferService {
             return new ArrayList<Offer>();
         }
         List<Long> safeId = ids.get();
+        System.out.println(safeId);
         return offerRepository.findOffersByIdIn(safeId);
     }
 

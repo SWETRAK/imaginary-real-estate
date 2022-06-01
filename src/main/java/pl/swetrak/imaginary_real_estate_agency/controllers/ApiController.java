@@ -36,7 +36,7 @@ public class ApiController {
     }
 
     @GetMapping("/get/liked")
-    ResponseEntity<List<Offer>> getLikedOfferes(@RequestBody Optional<List<Long>> ids) {
+    ResponseEntity<List<Offer>> getLikedOffers(@RequestBody Optional<List<Long>> ids) {
         return ResponseEntity.ok(offerService.getOfferByIdInRange(ids));
     }
 
