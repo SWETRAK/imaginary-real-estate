@@ -7,14 +7,14 @@ const debugLocalStorage = () => {
 const addLike = (offer) => {
     let liked = localStorage.getItem(likedKey);
     let likedJSON = JSON.parse(liked);
-    if(likedJSON == null ) {
+    if (likedJSON == null) {
         let newLiked = JSON.stringify([offer])
         localStorage.setItem(likedKey, newLiked);
     } else {
-        likedJSON = likedJSON.filter((value) => {
+        const likedJSON1 = likedJSON.filter((value) => {
             return value === offer; // zostaw wszystko co nie jest tym czego szukamy
         });
-        if(likedJSON.length === 0) {
+        if (likedJSON1.length === 0) {
             likedJSON.push(offer);
             let newLiked = JSON.stringify(likedJSON);
             localStorage.setItem(likedKey, newLiked);
