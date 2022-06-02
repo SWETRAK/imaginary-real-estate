@@ -89,7 +89,7 @@ const loadContent = () => {
                         "                <p class=\"is-4\"> Area: <strong>" + offer.area + "m2</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n" +
                         "                    class=\"fa-solid fa-bed\"></i> <strong>" + offer.bedrooms + "</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n" +
                         "                    class=\"fa-solid fa-bath\"></i> <strong>" + offer.bathrooms + "</strong></p>\n" +
-                        "                <div class=\"content\">\n" + offer.description + "\n" +
+                        "                <div class=\"content  my-text\">\n" + offer.description + "\n" +
                         "                </div>\n" +
                         "                <a href=\"/details/" + offer.id + "\" class=\"button is-info\">Details</a>\n" +
                         "                <br>\n" +
