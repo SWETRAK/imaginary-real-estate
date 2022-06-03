@@ -121,9 +121,11 @@
 
     <section class="hero is-medium has-carousel">
         <div id="carousel-demo" class="hero-carousel">
-            {{ #offer.images }}
-                <img class="my-gallery-img is-4by3" src="https://spring-irea.s3.eu-central-1.amazonaws.com/{{ imageFileName }}" alt="">
-            {{ /offer.images }}
+            {{ #carousel.images }}
+                <div class="item-{{ index }}">
+                    <img class="my-gallery-img is-4by3" src="https://spring-irea.s3.eu-central-1.amazonaws.com/{{ imageFileName }}" alt="">
+                </div>
+            {{ /carousel.images }}
         </div>
         <div class="hero-head"></div>
         <div class="hero-body"></div>
@@ -147,7 +149,7 @@
 <script>
     bulmaCarousel.attach('#carousel-demo', {
         slidesToScroll: 1,
-        slidesToShow: {{offer.images.length}}
+        slidesToShow: {{ carousel.length }}
     });
 </script>
 
