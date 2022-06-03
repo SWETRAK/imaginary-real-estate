@@ -55,6 +55,9 @@ public class WebController {
         return "favourite";
     }
 
+    @GetMapping("/contact")
+    public String getPublic() {return "contact";}
+
     @GetMapping("/details/{offerId}")
     public ModelAndView getOfferDetails(@PathVariable Long offerId) {
         ModelAndView modelAndView = new ModelAndView("details");
